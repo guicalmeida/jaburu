@@ -8,13 +8,21 @@ type Fields = {
   pluralApiId: string
 }
 
+const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/schemas`
+
 export default function SchemaForm() {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<Fields>()
-  const onSubmit: SubmitHandler<Fields> = (data) => console.log(data)
+  const onSubmit: SubmitHandler<Fields> = async (data) => {
+    await fetch(apiUrl, {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: { 'Content-type': 'application/json; charset=UTF-8' },
+    }).then(console.log)
+  }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
