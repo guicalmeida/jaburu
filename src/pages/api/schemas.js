@@ -1,15 +1,12 @@
-import { Knex } from 'knex'
+const knex = require('knex')
+const querystring = require('querystring')
+const url = require('url')
 import { database } from 'knexfile'
-import type { NextApiRequest, NextApiResponse } from 'next'
-import * as url from 'url'
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+export default async function handler(req, res) {
   if (req.method === 'POST') {
     const { schemaName, apiID, pluralApiId } = await req.body
-    const createTable = async (knex: Knex): Promise<any> =>
+    const createTable = async (knex) =>
       await knex.schema
         .createTable(schemaName, function (table) {
           table.increments()
@@ -24,5 +21,12 @@ export default async function handler(
         })
 
     createTable(database)
+  } else if (req.method === 'GET') {
+    const parsedUrl = url.parse(req.url ?? '')
+    const { tableName } = querystring.parse(parsedUrl.query)
+    const getAllTables = async (knex) =>
+      await knex.select('*').from('information_schema')
+
+    getAllTables(database).then(console.log)
   }
 }
