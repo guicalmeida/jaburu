@@ -1,6 +1,3 @@
-const knex = require('knex')
-const querystring = require('querystring')
-const url = require('url')
 import { database } from 'knexfile'
 
 export default async function handler(req, res) {
@@ -19,14 +16,17 @@ export default async function handler(req, res) {
           console.log(err)
           res.end(JSON.stringify('error'))
         })
-
     createTable(database)
   } else if (req.method === 'GET') {
-    const parsedUrl = url.parse(req.url ?? '')
-    const { tableName } = querystring.parse(parsedUrl.query)
     const getAllTables = async (knex) =>
-      await knex.select('*').from('information_schema')
+      await knex
+        .select('table_name')
+        .from('information_schema.tables')
+        .where({ table_schema: 'public' })
 
-    getAllTables(database).then(console.log)
+    getAllTables(database).then((tableArr) => {
+      const namesArr = tableArr.map((names) => names['table_name'])
+      res.end(JSON.stringify(namesArr))
+    })
   }
 }
