@@ -27,13 +27,13 @@ export default async function Sidebar() {
       </div>
       <div className="mt-6 flex items-center justify-between">
         <h2 className="ml-3 text-[15px] font-bold text-gray-200">Schemas</h2>
-        <a
+        <Link
           className="pr-5 text-lg font-bold"
           aria-label="add new item"
-          href="create-schema"
+          href="/schemas/create-schema"
         >
           +
-        </a>
+        </Link>
       </div>
 
       {tableNames?.map((tableName: string) => {
@@ -42,7 +42,10 @@ export default async function Sidebar() {
           <Link
             className="mt-3 flex cursor-pointer items-center rounded-md p-2.5 px-4 text-white duration-300 hover:bg-blue-600"
             key={slug}
-            href={`schemas/${slug}`}
+            href={{
+              pathname: `schemas/${slug}`,
+              query: tableName,
+            }}
           >
             <span className="ml-4 text-[15px] font-bold text-gray-200">
               {tableName}
