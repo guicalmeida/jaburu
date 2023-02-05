@@ -9,7 +9,7 @@ export default async function handler(req, res) {
           table.increments()
           table.timestamps()
         })
-        .then((value) => {
+        .finally(() => {
           res.end(JSON.stringify('table successfully created'))
         })
         .catch((err) => {
