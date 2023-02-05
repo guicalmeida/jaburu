@@ -1,5 +1,6 @@
 'use client'
 
+import { useRouter } from 'next/navigation'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 type Fields = {
@@ -11,6 +12,7 @@ type Fields = {
 const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/schemas`
 
 export default function SchemaForm() {
+  const router = useRouter()
   const {
     register,
     handleSubmit,
@@ -21,7 +23,9 @@ export default function SchemaForm() {
       method: 'POST',
       body: JSON.stringify(data),
       headers: { 'Content-type': 'application/json; charset=UTF-8' },
-    }).then(console.log)
+    }).then(() => {
+      router.refresh()
+    })
   }
 
   return (
