@@ -10,7 +10,7 @@ export default async function handler(req, res) {
           table.timestamps()
         })
         .finally(() => {
-          res.end(JSON.stringify('table successfully created'))
+          res.status(200).json('table successfully created')
         })
         .catch((err) => {
           console.log(err)
@@ -26,7 +26,7 @@ export default async function handler(req, res) {
 
     getAllTables(database).then((tableArr) => {
       const namesArr = tableArr.map((names) => names['table_name'])
-      res.end(JSON.stringify(namesArr))
+      res.status(200).json(namesArr)
     })
   }
 }
