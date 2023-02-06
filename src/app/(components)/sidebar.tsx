@@ -44,7 +44,7 @@ export default async function Sidebar() {
             key={slug}
             href={{
               pathname: `schemas/${slug}`,
-              query: tableName,
+              query: { name: tableName },
             }}
           >
             <span className="ml-4 text-[15px] font-bold text-gray-200">
