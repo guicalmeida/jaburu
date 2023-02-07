@@ -9,7 +9,7 @@ type Fields = {
   required: boolean
 }
 
-export default function SchemaForm() {
+export default function ColumnForm() {
   const router = useRouter()
   const {
     register,

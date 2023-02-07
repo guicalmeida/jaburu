@@ -4,7 +4,7 @@ import { useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import List from './(components)/list'
 import ListItem from './(components)/list-item'
-import SchemaForm from './(components)/schema-form'
+import ColumnForm from './(components)/column-form'
 import { Column } from './(models)/columns.model'
 
 export default function Page() {
@@ -35,7 +35,7 @@ export default function Page() {
       >
         create field
       </button>
-      {showForm && <SchemaForm />}
+      {showForm && <ColumnForm />}
       <h2>Current fields:</h2>
       <List>
         {columns.map((column) => {
