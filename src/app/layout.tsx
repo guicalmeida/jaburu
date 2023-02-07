@@ -11,17 +11,11 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const options = [
-    {
-      name: 'create schema',
-      path: 'create-schema',
-    },
-  ]
   return (
     <html lang="en" className={nunito.className}>
       <head />
-      <body className="ml-[300px]">
-        <Sidebar options={options} />
+      <body className="pl-[300px]">
+        <Sidebar />
         {children}
       </body>
     </html>
