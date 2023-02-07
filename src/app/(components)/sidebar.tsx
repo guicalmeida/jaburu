@@ -36,23 +36,26 @@ export default async function Sidebar() {
         </Link>
       </div>
 
-      {tableNames?.map((tableName: string) => {
-        const slug = universalSlugify(tableName)
-        return (
-          <Link
-            className="mt-3 flex cursor-pointer items-center rounded-md p-2.5 px-4 text-white duration-300 hover:bg-blue-600"
-            key={slug}
-            href={{
-              pathname: `schemas/${slug}`,
-              query: { name: tableName },
-            }}
-          >
-            <span className="ml-4 text-[15px] font-bold text-gray-200">
-              {tableName}
-            </span>
-          </Link>
-        )
-      })}
+      <ul>
+        {tableNames?.map((tableName: string) => {
+          const slug = universalSlugify(tableName)
+          return (
+            <li key={slug}>
+              <Link
+                className="mt-3 flex cursor-pointer items-center rounded-md p-2.5 px-4 text-white duration-300 hover:bg-blue-600"
+                href={{
+                  pathname: `schemas/${slug}`,
+                  query: { name: tableName },
+                }}
+              >
+                <span className="ml-4 text-[15px] font-bold text-gray-200">
+                  {tableName}
+                </span>
+              </Link>
+            </li>
+          )
+        })}
+      </ul>
     </div>
   )
 }
