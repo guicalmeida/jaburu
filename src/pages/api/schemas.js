@@ -7,7 +7,7 @@ export default async function handler(req, res) {
       await knex.schema
         .createTable(schemaName, function (table) {
           table.increments()
-          table.timestamps()
+          table.timestamps(false, true)
         })
         .finally(() => {
           res.status(200).json('table successfully created')
