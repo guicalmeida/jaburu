@@ -8,8 +8,7 @@ export default async function handler(req, res) {
       await knex(tableName).insert(req.body)
 
     insertIntoTable(database)
-      .finally((value) => {
-        console.log(value)
+      .finally(() => {
         res.status(200).json('value created')
       })
       .catch((err) => {
