@@ -1,10 +1,10 @@
 import universalSlugify from '@/helpers/slugHelper'
 import Link from 'next/link'
 
-const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/schemas`
-
 async function getTableNames() {
-  const res = await fetch(apiUrl, { method: 'GET' })
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/schemas`, {
+    method: 'GET',
+  })
 
   if (!res.ok) {
     throw new Error('Failed to fetch data')
@@ -48,7 +48,30 @@ export default async function Sidebar() {
                   query: { name: tableName },
                 }}
               >
-                <span className="ml-4 text-[15px] font-bold text-gray-200">
+                <span className="ml-4 text-[15px] font-extralight text-gray-200">
+                  {tableName}
+                </span>
+              </Link>
+            </li>
+          )
+        })}
+      </ul>
+      <div className="mt-6 flex items-center justify-between">
+        <h2 className="ml-3 text-[15px] font-bold text-gray-200">Content</h2>
+      </div>
+      <ul>
+        {tableNames?.map((tableName: string) => {
+          const slug = universalSlugify(tableName)
+          return (
+            <li key={slug}>
+              <Link
+                className="mt-3 flex cursor-pointer items-center rounded-md p-2.5 px-4 text-white duration-300 hover:bg-blue-600"
+                href={{
+                  pathname: `content/${slug}`,
+                  query: { name: tableName },
+                }}
+              >
+                <span className="ml-4 text-[15px] font-extralight text-gray-200">
                   {tableName}
                 </span>
               </Link>
