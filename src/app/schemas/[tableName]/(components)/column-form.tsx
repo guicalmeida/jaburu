@@ -18,7 +18,9 @@ export default function ColumnForm() {
   } = useForm<Fields>({ defaultValues: { required: false } })
 
   const tableName = useSearchParams().get('name')
-  const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/${tableName}`
+  const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/${encodeURI(
+    tableName as string
+  )}`
 
   const onSubmit: SubmitHandler<Fields> = async (data) => {
     await fetch(apiUrl, {
