@@ -1,9 +1,6 @@
 'use client'
 
-import {
-  Column,
-  staticColumns,
-} from '@/app/schemas/[tableName]/(models)/columns.model'
+import { Column, staticColumns } from '@/models/columns.model'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { use } from 'react'
 

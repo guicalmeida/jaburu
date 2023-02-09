@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import List from './(components)/list'
 import ListItem from './(components)/list-item'
 import ColumnForm from './(components)/column-form'
-import { Column } from './(models)/columns.model'
+import { Column } from '../../../models/columns.model'
 
 export default function Page() {
   const searchParams = useSearchParams()

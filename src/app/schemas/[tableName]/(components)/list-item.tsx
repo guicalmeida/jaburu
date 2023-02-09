@@ -1,5 +1,5 @@
 import universalSlugify from '@/helpers/slugHelper'
-import { Column, typeMap } from '../(models)/columns.model'
+import { Column, typeMap } from '../../../../models/columns.model'
 
 export default function ListItem({ columnName, required, type }: Column) {
   return (
