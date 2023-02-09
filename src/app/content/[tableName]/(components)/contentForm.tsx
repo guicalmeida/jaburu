@@ -27,7 +27,7 @@ export default function ContentForm() {
     })
   }
 
-  const columns: any = use(fetchColumns(apiUrl)).filter(
+  const columns: any = use(fetchColumns(`${apiUrl}/columns`)).filter(
     (column: Column) => !staticColumns.includes(column.columnName)
   )
 

@@ -15,7 +15,7 @@ export default function Page() {
   const [columns, setColumns] = useState<Column[]>([])
   const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/${encodeURI(
     name as string
-  )}`
+  )}/columns`
 
   useEffect(() => {
     async function fetchColumns() {
