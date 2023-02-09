@@ -1,3 +1,9 @@
+import ContentForm from './(components)/contentForm'
+
 export default function Page() {
-  return <p>gui</p>
+  return (
+    <>
+      <ContentForm />
+    </>
+  )
 }
