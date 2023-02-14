@@ -50,9 +50,6 @@ export default async function handler(req, res) {
       .then((data) => {
         res.status(200).json(data)
       })
-      .finally(() => {
-        database.destroy()
-      })
       .catch((err) => {
         console.log(err)
         res.end(JSON.stringify('error'))
