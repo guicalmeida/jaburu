@@ -29,5 +29,17 @@ export default async function handler(req, res) {
         console.log(err)
         res.end(JSON.stringify('error'))
       })
+  } else if (req.method === 'DELETE') {
+    const deleteContent = async (knex) =>
+      await knex(tableName).where({ id }).del()
+
+    deleteContent(database)
+      .then((data) => {
+        res.status(200).json(data)
+      })
+      .catch((err) => {
+        console.log(err)
+        res.end(JSON.stringify('error'))
+      })
   }
 }
