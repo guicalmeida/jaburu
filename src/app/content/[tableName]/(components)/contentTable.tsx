@@ -5,6 +5,7 @@ import { columnMap } from '@/models/columns.model'
 import { useSearchParams } from 'next/navigation'
 import { use, useMemo } from 'react'
 import { formatUTC, isValidDate } from '@/helpers/timeHelper'
+import Link from 'next/link'
 
 async function fetchContent(apiUrl: string) {
   const data = await fetch(apiUrl, { method: 'GET' })
@@ -12,10 +13,8 @@ async function fetchContent(apiUrl: string) {
 }
 
 export default function ContentTable() {
-  const tableName = useSearchParams().get('name')
-  const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/${encodeURI(
-    tableName as string
-  )}`
+  const tableNameUrl = encodeURI(useSearchParams().get('name') as string)
+  const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/${tableNameUrl}`
 
   const contentResponse: any = use(fetchContent(apiUrl))
   const columnsResponse = Object.keys(contentResponse[0])
@@ -57,6 +56,9 @@ export default function ContentTable() {
                   {isValidDate(cell[1]) ? formatUTC(cell[1]) : cell[1]}
                 </td>
               ))}
+              <td className="px-6 py-4">
+                <Link href={`content/${tableNameUrl}/${info.id}`}>Edit</Link>
+              </td>
             </tr>
           ))}
         </tbody>
