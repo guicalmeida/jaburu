@@ -32,15 +32,11 @@ export default async function handler(req, res) {
       })
   } else if (req.method === 'GET') {
     const getAllTables = async (knex) =>
-      await knex
-        .select('table_name')
-        .from('information_schema.tables')
-        .where({ table_schema: 'public' })
+      await knex.select('*').from('tables_metadata')
 
     return await getAllTables(database)
       .then((tableArr) => {
-        const namesArr = tableArr.map((names) => names['table_name'])
-        return res.status(200).json(namesArr)
+        return res.status(200).json(tableArr)
       })
       .catch((err) => {
         console.log(err)
