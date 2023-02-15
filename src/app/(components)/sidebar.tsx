@@ -37,19 +37,16 @@ export default async function Sidebar() {
       </div>
 
       <ul>
-        {tableNames?.map((tableName: string) => {
-          const slug = universalSlugify(tableName)
+        {tableNames?.map((tableData: TableData) => {
+          const { display_name, slug } = tableData
           return (
             <li key={slug}>
               <Link
                 className="mt-3 flex cursor-pointer items-center rounded-md p-2.5 px-4 text-white duration-300 hover:bg-blue-600"
-                href={{
-                  pathname: `/schemas/${slug}`,
-                  query: { name: tableName },
-                }}
+                href={`/schemas/${slug}`}
               >
                 <span className="ml-4 text-[15px] font-extralight text-gray-200">
-                  {tableName}
+                  {display_name}
                 </span>
               </Link>
             </li>
@@ -60,19 +57,16 @@ export default async function Sidebar() {
         <h2 className="ml-3 text-[15px] font-bold text-gray-200">Content</h2>
       </div>
       <ul>
-        {tableNames?.map((tableName: string) => {
-          const slug = universalSlugify(tableName)
+        {tableNames?.map((tableData: TableData) => {
+          const { display_name, slug } = tableData
           return (
             <li key={slug}>
               <Link
                 className="mt-3 flex cursor-pointer items-center rounded-md p-2.5 px-4 text-white duration-300 hover:bg-blue-600"
-                href={{
-                  pathname: `content/${slug}`,
-                  query: { name: tableName },
-                }}
+                href={`content/${slug}`}
               >
                 <span className="ml-4 text-[15px] font-extralight text-gray-200">
-                  {tableName}
+                  {display_name}
                 </span>
               </Link>
             </li>
@@ -81,4 +75,11 @@ export default async function Sidebar() {
       </ul>
     </div>
   )
+}
+
+interface TableData {
+  id: number
+  slug: string
+  display_name: string
+  created_at: string
 }
