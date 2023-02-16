@@ -12,7 +12,7 @@ export default async function handler(req, res) {
       })
       .catch((err) => {
         console.log(err)
-        return res.status(400).json('error')
+        return res.status(400).json({ error: 'error' })
       })
   } else if (req.method === 'PUT') {
     const timestamp = getCurrentTime()
@@ -27,7 +27,7 @@ export default async function handler(req, res) {
       })
       .catch((err) => {
         console.log(err)
-        return res.status(400).json('error')
+        return res.status(400).json({ error: 'error' })
       })
   } else if (req.method === 'DELETE') {
     const deleteContent = async (knex) =>
@@ -39,7 +39,7 @@ export default async function handler(req, res) {
       })
       .catch((err) => {
         console.log(err)
-        return res.status(400).json('error')
+        return res.status(400).json({ error: 'error' })
       })
   }
 }

@@ -24,11 +24,11 @@ export default async function handler(req, res) {
 
     return await Promise.all([createTable, registerTable])
       .then(() => {
-        return res.status(201).json('table successfully created')
+        return res.status(201).json({ message: 'table successfully created' })
       })
       .catch((err) => {
         console.log(err)
-        return res.status(400).json('error')
+        return res.status(400).json({ error: 'error' })
       })
   } else if (req.method === 'GET') {
     const getAllTables = async (knex) =>
@@ -40,7 +40,7 @@ export default async function handler(req, res) {
       })
       .catch((err) => {
         console.log(err)
-        return res.status(400).json('error')
+        return res.status(400).json({ error: 'error' })
       })
   }
 }
