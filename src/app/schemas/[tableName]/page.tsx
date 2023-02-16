@@ -1,44 +1,27 @@
-'use client'
-
-import { useSearchParams } from 'next/navigation'
-import { useEffect, useState } from 'react'
 import List from './(components)/list'
 import ListItem from './(components)/list-item'
 import ColumnForm from './(components)/column-form'
 import { Column } from '../../../models/columns.model'
 
-export default function Page() {
-  const searchParams = useSearchParams()
-  const name = searchParams.get('name')
+async function fetchColumns(apiUrl: string) {
+  const data = await fetch(apiUrl, { method: 'GET' })
+  return data.json()
+}
 
-  const [showForm, setShowForm] = useState(false)
-  const [columns, setColumns] = useState<Column[]>([])
-  const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/${encodeURI(
-    name as string
-  )}/columns`
-
-  useEffect(() => {
-    async function fetchColumns() {
-      const data = await fetch(apiUrl, { method: 'GET' })
-      const json = await data.json()
-      setColumns(json)
-    }
-
-    fetchColumns().catch(console.error)
-  }, [apiUrl])
+export default async function Page({
+  params,
+}: {
+  params: { tableName: string }
+}) {
+  const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/${params?.tableName}/columns`
+  const columns = await fetchColumns(apiUrl)
 
   return (
     <>
-      <button
-        className="m-6 rounded-md bg-emerald-600 py-2 px-8"
-        onClick={() => setShowForm(true)}
-      >
-        create field
-      </button>
-      {showForm && <ColumnForm />}
+      <ColumnForm slug={params?.tableName} />
       <h2>Current fields:</h2>
       <List>
-        {columns.map((column) => {
+        {columns.map((column: Column) => {
           const { columnName, required, type } = column
           return (
             <ListItem

@@ -1,6 +1,6 @@
 'use client'
 
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 type Fields = {
@@ -9,7 +9,7 @@ type Fields = {
   required: boolean
 }
 
-export default function ColumnForm() {
+export default function ColumnForm({ slug }: { slug: string }) {
   const router = useRouter()
   const {
     register,
@@ -17,10 +17,7 @@ export default function ColumnForm() {
     formState: { errors },
   } = useForm<Fields>({ defaultValues: { required: false } })
 
-  const tableName = useSearchParams().get('name')
-  const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/${encodeURI(
-    tableName as string
-  )}`
+  const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/${slug}`
 
   const onSubmit: SubmitHandler<Fields> = async (data) => {
     await fetch(apiUrl, {
