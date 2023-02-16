@@ -1,7 +1,6 @@
 'use client'
 
 import { Column, staticColumns } from '@/models/columns.model'
-import { useRouter, useSearchParams } from 'next/navigation'
 import { use } from 'react'
 
 async function fetchColumns(apiUrl: string) {
@@ -9,11 +8,8 @@ async function fetchColumns(apiUrl: string) {
   return data.json()
 }
 
-export default function ContentForm() {
-  const tableName = useSearchParams().get('name')
-  const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/${encodeURI(
-    tableName as string
-  )}`
+export default function ContentForm({ slug }: { slug: string }) {
+  const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/${slug}`
 
   function handleSubmit(e: any) {
     e.preventDefault()
