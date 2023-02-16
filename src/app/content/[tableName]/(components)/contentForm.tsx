@@ -8,8 +8,8 @@ async function fetchColumns(apiUrl: string) {
   return data.json()
 }
 
-export default function ContentForm({ slug }: { slug: string }) {
-  const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/${slug}`
+export default function ContentForm({ path }: { path: string }) {
+  const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/${path}`
 
   function handleSubmit(e: any) {
     e.preventDefault()
