@@ -27,32 +27,36 @@ export default function ContentForm({ slug }: { slug: string }) {
     (column: Column) => !staticColumns.includes(column.columnName)
   )
 
-  return (
-    <>
-      <form onSubmit={handleSubmit}>
-        {columns?.map((column: Column) => {
-          const { columnName, required, type } = column
-          return (
-            <label
-              key={columnName}
-              className="mb-3 block text-base font-medium"
-            >
-              {columnName}:
-              <input
-                name={columnName}
-                required={required}
-                type={type === 'int4' ? 'number' : 'text'}
-                className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-slate-900 outline-none focus:border-[#6A64F1] focus:shadow-md"
-              />
-            </label>
-          )
-        })}
-        <input
-          className="m-6 rounded-md bg-emerald-600 py-2 px-8"
-          type="submit"
-          value="Submit"
-        />
-      </form>
-    </>
-  )
+  if (columns.length > 0) {
+    return (
+      <>
+        <form onSubmit={handleSubmit}>
+          {columns?.map((column: Column) => {
+            const { columnName, required, type } = column
+            return (
+              <label
+                key={columnName}
+                className="mb-3 block text-base font-medium"
+              >
+                {columnName}:
+                <input
+                  name={columnName}
+                  required={required}
+                  type={type === 'int4' ? 'number' : 'text'}
+                  className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-slate-900 outline-none focus:border-[#6A64F1] focus:shadow-md"
+                />
+              </label>
+            )
+          })}
+          <input
+            className="m-6 rounded-md bg-emerald-600 py-2 px-8"
+            type="submit"
+            value="Submit"
+          />
+        </form>
+      </>
+    )
+  } else {
+    return <p>no columns were created.</p>
+  }
 }
