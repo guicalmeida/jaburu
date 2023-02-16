@@ -5,13 +5,13 @@ export default async function handler(req, res) {
   const { tableName } = req.query
 
   if (req.method === 'POST') {
-    insertIntoTable(database, tableName, req.body)
-      .finally(() => {
-        res.status(200).json('value created')
+    return insertIntoTable(database, tableName, req.body)
+      .then(() => {
+        return res.status(201).json('value created')
       })
       .catch((err) => {
         console.log(err)
-        res.end(JSON.stringify('error'))
+        return res.status(400).json('error')
       })
   }
 }

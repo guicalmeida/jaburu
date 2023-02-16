@@ -6,13 +6,13 @@ export default async function handler(req, res) {
   if (req.method === 'GET') {
     const getContentById = async (knex) => await knex(tableName).where({ id })
 
-    getContentById(database)
+    return getContentById(database)
       .then((data) => {
-        res.status(200).json(data)
+        return res.status(200).json(data)
       })
       .catch((err) => {
         console.log(err)
-        res.end(JSON.stringify('error'))
+        return res.status(400).json('error')
       })
   } else if (req.method === 'PUT') {
     const timestamp = getCurrentTime()
@@ -21,25 +21,25 @@ export default async function handler(req, res) {
         .where({ id })
         .update({ ...req.body, updated_at: timestamp })
 
-    editContent(database)
+    return editContent(database)
       .then((data) => {
-        res.status(200).json(data)
+        return res.status(201).json(data)
       })
       .catch((err) => {
         console.log(err)
-        res.end(JSON.stringify('error'))
+        return res.status(400).json('error')
       })
   } else if (req.method === 'DELETE') {
     const deleteContent = async (knex) =>
       await knex(tableName).where({ id }).del()
 
-    deleteContent(database)
+    return deleteContent(database)
       .then((data) => {
-        res.status(200).json(data)
+        return res.status(200).json(data)
       })
       .catch((err) => {
         console.log(err)
-        res.end(JSON.stringify('error'))
+        return res.status(400).json('error')
       })
   }
 }

@@ -10,7 +10,7 @@ export default async function handler(req, res) {
         .from('information_schema.columns')
         .where({ table_name: tableName, table_schema: 'public' })
 
-    getAllColumns(database)
+    return getAllColumns(database)
       .then((columnsArr) => {
         const columnsInfo = columnsArr.map((columnData) => {
           const { column_name, is_nullable, udt_name } = columnData
@@ -20,11 +20,11 @@ export default async function handler(req, res) {
             type: udt_name,
           }
         })
-        res.status(200).json(columnsInfo)
+        return res.status(200).json(columnsInfo)
       })
       .catch((err) => {
         console.log(err)
-        res.end(JSON.stringify('error'))
+        return res.status(400).json('error')
       })
   }
 }

@@ -34,25 +34,25 @@ export default async function handler(req, res) {
       }
     }
 
-    createColumn(database)
-      .finally((value) => {
+    return createColumn(database)
+      .then((value) => {
         console.log(value)
-        res.status(200).json('value created')
+        return res.status(201).json('value created')
       })
       .catch((err) => {
         console.log(err)
-        res.end(JSON.stringify('error'))
+        return res.status(400).json('error')
       })
   } else if (req.method === 'GET') {
     const getAllPosts = async (knex) => await knex(tableName)
 
-    getAllPosts(database)
+    return getAllPosts(database)
       .then((data) => {
-        res.status(200).json(data)
+        return res.status(200).json(data)
       })
       .catch((err) => {
         console.log(err)
-        res.end(JSON.stringify('error'))
+        return res.status(400).json('error')
       })
   }
 }
