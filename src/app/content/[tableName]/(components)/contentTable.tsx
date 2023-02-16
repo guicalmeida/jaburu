@@ -38,31 +38,31 @@ function ContentRows(data: any[], slug: string) {
 export default async function ContentTable({ slug }: { slug: string }) {
   const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/${slug}`
 
-  const content: any = await fetchContent(apiUrl)
-  const columns: any = await fetchColumns(apiUrl)
+  const contentData: any = fetchContent(apiUrl)
+  const columnsData: any = fetchColumns(apiUrl)
 
-  if (content.length > 0) {
-    return (
-      <div className="m-5 overflow-hidden rounded-lg border border-gray-200 shadow-md">
-        <table className="w-full border-collapse bg-white text-left text-sm text-gray-500">
-          <thead className="bg-gray-50">
-            <tr>
-              {columns.map((col: Column) => (
-                <th
-                  key={col.columnName}
-                  scope="col"
-                  className="px-6 py-4 font-medium text-gray-900"
-                >
-                  {col.columnName}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-gray-100 border-t border-gray-100">
-            {ContentRows(content, slug)}
-          </tbody>
-        </table>
-      </div>
-    )
-  }
+  const [content, columns] = await Promise.all([contentData, columnsData])
+
+  return (
+    <div className="m-5 overflow-hidden rounded-lg border border-gray-200 shadow-md">
+      <table className="w-full border-collapse bg-white text-left text-sm text-gray-500">
+        <thead className="bg-gray-50">
+          <tr>
+            {columns.map((col: Column) => (
+              <th
+                key={col.columnName}
+                scope="col"
+                className="px-6 py-4 font-medium text-gray-900"
+              >
+                {col.columnName}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody className="divide-y divide-gray-100 border-t border-gray-100">
+          {ContentRows(content, slug)}
+        </tbody>
+      </table>
+    </div>
+  )
 }
