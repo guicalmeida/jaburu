@@ -2,6 +2,7 @@
 
 import makeQueryClient from '@/helpers/clientQueryHelper'
 import { Column, staticColumns } from '@/models/columns.model'
+import { useRouter } from 'next/navigation'
 import { use } from 'react'
 
 async function fetchColumns(apiUrl: string) {
@@ -17,6 +18,7 @@ async function fetchContentById(apiUrl: string) {
 const queryClient = makeQueryClient()
 
 export default function ContentForm({ path, id }: FormProps) {
+  const router = useRouter()
   const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/${path}`
   let content: Record<string, any>
 
@@ -25,20 +27,30 @@ export default function ContentForm({ path, id }: FormProps) {
 
     const formData = new FormData(e.target)
     const formJson = Object.fromEntries(formData.entries())
-    fetch(`${apiUrl}/create`, {
-      method: 'POST',
-      body: JSON.stringify(formJson),
-      headers: { 'Content-type': 'application/json; charset=UTF-8' },
-    })
+    if (id) {
+      fetch(`${apiUrl}/${id}`, {
+        method: 'PUT',
+        body: JSON.stringify(formJson),
+        headers: { 'Content-type': 'application/json; charset=UTF-8' },
+      })
+        .then(() => router.refresh())
+        .then(() => router.push(`content/${path}`))
+    } else {
+      fetch(`${apiUrl}/create`, {
+        method: 'POST',
+        body: JSON.stringify(formJson),
+        headers: { 'Content-type': 'application/json; charset=UTF-8' },
+      })
+    }
   }
 
   const columns: any = use(
-    queryClient('columns', () => fetchColumns(`${apiUrl}/columns`))
+    queryClient(`${path}_columns`, () => fetchColumns(`${apiUrl}/columns`))
   ).filter((column: Column) => !staticColumns.includes(column.columnName))
 
   if (id) {
     content = use(
-      queryClient('content', () => fetchContentById(`${apiUrl}/${id}`))
+      queryClient(`id_${id}_content`, () => fetchContentById(`${apiUrl}/${id}`))
     )[0]
   }
 
