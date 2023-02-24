@@ -1,6 +1,6 @@
-import List from './(components)/list'
-import ListItem from './(components)/list-item'
-import ColumnForm from './(components)/column-form'
+import List from './(edit_schema_components)/list'
+import ListItem from './(edit_schema_components)/list-item'
+import ColumnForm from './(edit_schema_components)/column-form'
 import { Column } from '../../../models/columns.model'
 
 async function fetchColumns(apiUrl: string) {
