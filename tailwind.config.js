@@ -6,6 +6,15 @@ module.exports = {
     './src/components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
+    colors: {
+      jaburu: {
+        100: '#806996',
+        200: '#434984',
+        300: '#40354B',
+        400: '#2E2636',
+      },
+      white: '#FBFCFF',
+    },
     extend: {},
   },
   plugins: [],
