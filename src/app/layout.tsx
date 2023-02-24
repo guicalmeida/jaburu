@@ -15,6 +15,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     >
       <head />
       <body className="pl-[328px]">
+        {/* @ts-expect-error Server Component */}
         <Sidebar />
         {children}
       </body>
