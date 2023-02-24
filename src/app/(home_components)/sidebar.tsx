@@ -1,4 +1,4 @@
-import universalSlugify from '@/helpers/slugHelper'
+import Card from '@/components/Card'
 import Link from 'next/link'
 
 async function getTableNames() {
@@ -16,17 +16,15 @@ async function getTableNames() {
 export default async function Sidebar() {
   const tableNames = await getTableNames()
   return (
-    <div className="sidebar fixed top-0 bottom-0 left-0 w-[300px] overflow-y-auto bg-gray-900 p-2 text-center">
-      <div className="text-xl text-gray-100">
-        <div className="mt-1 flex items-center p-2.5">
-          <h1 className="ml-3 text-[15px] font-bold text-gray-200">
-            Jaburu CMS
-          </h1>
+    <Card containerStyle="fixed top-0 bottom-0 left-0 w-72">
+      <div className="text-gray-100 text-xl">
+        <div className="flex items-center">
+          <h1 className="font-bold">Jaburu CMS</h1>
         </div>
-        <div className="my-2 h-[1px] bg-gray-600"></div>
+        <div className="my-2 h-[1px] bg-white"></div>
       </div>
       <div className="mt-6 flex items-center justify-between">
-        <h2 className="ml-3 text-[15px] font-bold text-gray-200">Schemas</h2>
+        <h2 className="text-base font-bold tracking-widest">TABLES</h2>
         <Link
           className="pr-5 text-lg font-bold"
           aria-label="add new item"
@@ -42,10 +40,10 @@ export default async function Sidebar() {
           return (
             <li key={slug}>
               <Link
-                className="mt-3 flex cursor-pointer items-center rounded-md p-2.5 px-4 text-white duration-300 hover:bg-blue-600"
+                className="mt-3 flex cursor-pointer items-center rounded-md p-2.5 px-4 duration-300 hover:bg-jaburu-200"
                 href={`/schemas/${slug}`}
               >
-                <span className="ml-4 text-[15px] font-extralight text-gray-200">
+                <span className="text-gray-200 ml-4 text-[15px] font-extralight">
                   {display_name}
                 </span>
               </Link>
@@ -54,7 +52,7 @@ export default async function Sidebar() {
         })}
       </ul>
       <div className="mt-6 flex items-center justify-between">
-        <h2 className="ml-3 text-[15px] font-bold text-gray-200">Content</h2>
+        <h2 className="text-base font-bold tracking-widest">CONTENT</h2>
       </div>
       <ul>
         {tableNames?.map((tableData: TableData) => {
@@ -62,10 +60,10 @@ export default async function Sidebar() {
           return (
             <li key={slug}>
               <Link
-                className="mt-3 flex cursor-pointer items-center rounded-md p-2.5 px-4 text-white duration-300 hover:bg-blue-600"
+                className="mt-3 flex cursor-pointer items-center rounded-md p-2.5 px-4 duration-300 hover:bg-jaburu-200"
                 href={`content/${slug}`}
               >
-                <span className="ml-4 text-[15px] font-extralight text-gray-200">
+                <span className="text-gray-200 ml-4 text-[15px] font-extralight">
                   {display_name}
                 </span>
               </Link>
@@ -73,7 +71,7 @@ export default async function Sidebar() {
           )
         })}
       </ul>
-    </div>
+    </Card>
   )
 }
 
