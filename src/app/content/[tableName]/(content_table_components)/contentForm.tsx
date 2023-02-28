@@ -19,7 +19,7 @@ const queryClient = makeQueryClient()
 
 export default function ContentForm({ path, id }: FormProps) {
   const router = useRouter()
-  const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/${path}`
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL
   let content: Record<string, any>
 
   function handleSubmit(e: any) {
@@ -28,7 +28,7 @@ export default function ContentForm({ path, id }: FormProps) {
     const formData = new FormData(e.target)
     const formJson = Object.fromEntries(formData.entries())
     if (id) {
-      fetch(`${apiUrl}/${id}`, {
+      fetch(`${apiUrl}/${path}/${id}`, {
         method: 'PUT',
         body: JSON.stringify(formJson),
         headers: { 'Content-type': 'application/json; charset=UTF-8' },
@@ -36,7 +36,7 @@ export default function ContentForm({ path, id }: FormProps) {
         .then(() => router.refresh())
         .then(() => router.push(`content/${path}`))
     } else {
-      fetch(`${apiUrl}/create`, {
+      fetch(`${apiUrl}/${path}/create`, {
         method: 'POST',
         body: JSON.stringify(formJson),
         headers: { 'Content-type': 'application/json; charset=UTF-8' },
@@ -44,13 +44,20 @@ export default function ContentForm({ path, id }: FormProps) {
     }
   }
 
-  const columns: any = use(
-    queryClient(`${path}_columns`, () => fetchColumns(`${apiUrl}/columns`))
-  ).filter((column: Column) => !staticColumns.includes(column.columnName))
+  const tableMetadata: any = use(
+    queryClient(`${path}_metadata`, () =>
+      fetchColumns(`${apiUrl}/schemas/${path}`)
+    )
+  )
+  const columns = tableMetadata.columns.filter(
+    (column: Column) => !staticColumns.includes(column.columnName)
+  )
 
   if (id) {
     content = use(
-      queryClient(`id_${id}_content`, () => fetchContentById(`${apiUrl}/${id}`))
+      queryClient(`id_${id}_content`, () =>
+        fetchContentById(`${apiUrl}/${path}/${id}`)
+      )
     )[0]
   }
 
@@ -71,13 +78,13 @@ export default function ContentForm({ path, id }: FormProps) {
                   required={required}
                   defaultValue={content?.[columnName]}
                   type={type === 'int4' ? 'number' : 'text'}
-                  className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-slate-900 outline-none focus:border-[#6A64F1] focus:shadow-md"
+                  className="text-slate-900 w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium outline-none focus:border-[#6A64F1] focus:shadow-md"
                 />
               </label>
             )
           })}
           <input
-            className="m-6 rounded-md bg-emerald-600 py-2 px-8"
+            className="bg-emerald-600 m-6 rounded-md py-2 px-8"
             type="submit"
             value="Submit"
           />
