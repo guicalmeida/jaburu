@@ -1,5 +1,5 @@
 import './globals.css'
-import Sidebar from './(home_components)/sidebar'
+import Sidebar from '../components/sidebar'
 import { Nunito } from '@next/font/google'
 import { ReactNode } from 'react'
 

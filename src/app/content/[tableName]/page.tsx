@@ -1,5 +1,5 @@
-import ContentForm from './(content_table_components)/contentForm'
-import ContentTable from './(content_table_components)/contentTable'
+import ContentTable from '@/components/contentTable'
+import ContentForm from '../../../components/contentForm'
 
 export default function Page({ params }: { params: { tableName: string } }) {
   return (

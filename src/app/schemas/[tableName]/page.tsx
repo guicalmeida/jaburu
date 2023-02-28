@@ -1,8 +1,8 @@
-import List from './(edit_schema_components)/list'
-import ListItem from './(edit_schema_components)/list-item'
-import ColumnForm from './(edit_schema_components)/column-form'
-import { Column } from '../../../models/columns.model'
 import Card from '@/components/Card'
+import ColumnForm from '@/components/column-form'
+import List from '@/components/list'
+import ListItem from '@/components/list-item'
+import { Column } from '@/models/columns.model'
 
 async function fetchTableMetadata(apiUrl: string) {
   const data = await fetch(apiUrl, { method: 'GET' })

@@ -1,5 +1,5 @@
 import Card from '@/components/Card'
-import SchemaForm from './(create_schema_components)/schema-form'
+import SchemaForm from '../../../components/schema-form'
 
 export default function CreateSchema() {
   return (

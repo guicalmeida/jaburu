@@ -1,4 +1,4 @@
-import ContentForm from '../(content_table_components)/contentForm'
+import ContentForm from '../../../../components/contentForm'
 import DeleteEntryButton from '../(content_table_components)/deleteEntryButton'
 
 export default async function Page({
