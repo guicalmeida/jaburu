@@ -36,12 +36,12 @@ export default async function Sidebar() {
 
       <ul>
         {tableNames?.map((tableData: TableData) => {
-          const { display_name, slug } = tableData
+          const { display_name, api_id } = tableData
           return (
-            <li key={slug}>
+            <li key={api_id}>
               <Link
                 className="mt-3 flex cursor-pointer items-center rounded-md p-2.5 px-4 duration-300 hover:bg-jaburu-200"
-                href={`/schemas/${slug}`}
+                href={`/schemas/${api_id}`}
               >
                 <span className="text-gray-200 ml-4 text-[15px] font-extralight">
                   {display_name}
@@ -56,12 +56,12 @@ export default async function Sidebar() {
       </div>
       <ul>
         {tableNames?.map((tableData: TableData) => {
-          const { display_name, slug } = tableData
+          const { display_name, api_id } = tableData
           return (
-            <li key={slug}>
+            <li key={api_id}>
               <Link
                 className="mt-3 flex cursor-pointer items-center rounded-md p-2.5 px-4 duration-300 hover:bg-jaburu-200"
-                href={`content/${slug}`}
+                href={`content/${api_id}`}
               >
                 <span className="text-gray-200 ml-4 text-[15px] font-extralight">
                   {display_name}
@@ -77,7 +77,9 @@ export default async function Sidebar() {
 
 interface TableData {
   id: number
-  slug: string
+  api_id: string
+  description: string
+  plural_api_id: string
   display_name: string
   created_at: string
 }
