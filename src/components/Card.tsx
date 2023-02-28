@@ -5,11 +5,11 @@ export default function Card({
   containerStyle,
 }: {
   children: ReactNode
-  containerStyle: string
+  containerStyle?: string
 }) {
   return (
     <div
-      className={`${containerStyle} m-5 overflow-y-auto rounded-2xl bg-jaburu-400 p-5`}
+      className={`${containerStyle} m-5 overflow-y-auto rounded-2xl bg-jaburu-400 p-5 shadow-lg`}
     >
       {children}
     </div>

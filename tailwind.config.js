@@ -14,6 +14,7 @@ module.exports = {
         400: '#2E2636',
       },
       white: '#FBFCFF',
+      disabled: '#999999',
     },
     extend: {},
   },

@@ -11,6 +11,7 @@
   "dependencies": {
     "@next/font": "13.1.5",
     "@types/node": "18.11.18",
+    "@types/pluralize": "^0.0.29",
     "@types/react": "18.0.27",
     "@types/react-dom": "18.0.10",
     "@types/react-table": "^7.7.14",
@@ -21,6 +22,7 @@
     "knex": "^2.4.2",
     "next": "^13.1.6",
     "pg": "^8.9.0",
+    "pluralize": "^8.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.42.1",
