@@ -1,5 +1,5 @@
 import { database } from 'knexfile'
-import { insertIntoTable } from './(common)'
+import { insertIntoTable } from '../(common)'
 
 async function createDefaultTable(knex, tableName) {
   return await knex.schema.createTable(tableName, (table) => {
