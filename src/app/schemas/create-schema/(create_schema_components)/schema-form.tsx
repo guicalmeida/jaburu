@@ -17,11 +17,14 @@ export default function SchemaForm() {
 
     const formData = new FormData(e.target)
     const formJson = Object.fromEntries(formData.entries())
-    fetch(`${apiUrl}`, {
+    fetch(apiUrl, {
       method: 'POST',
       body: JSON.stringify(formJson),
       headers: { 'Content-type': 'application/json; charset=UTF-8' },
-    }).then(() => router.refresh())
+    }).then(() => {
+      router.refresh()
+      router.push(`/schemas/${apiId}`)
+    })
   }
 
   function autoFillApiId(e: any) {
