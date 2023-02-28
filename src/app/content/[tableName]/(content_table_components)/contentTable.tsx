@@ -7,8 +7,8 @@ async function fetchContent(apiUrl: string) {
   return data.json()
 }
 
-async function fetchColumns(apiUrl: string) {
-  const data = await fetch(`${apiUrl}/columns`, { method: 'GET' })
+async function fetchTableMetadata(apiUrl: string) {
+  const data = await fetch(apiUrl, { method: 'GET' })
   return data.json()
 }
 
@@ -36,30 +36,30 @@ function ContentRows(data: any[], slug: string) {
 }
 
 export default async function ContentTable({ slug }: { slug: string }) {
-  const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/${slug}`
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL
 
-  const contentData: any = fetchContent(apiUrl)
-  const columnsData: any = fetchColumns(apiUrl)
+  const contentData: any = fetchContent(`${apiUrl}/${slug}`)
+  const tableMetadata: any = fetchTableMetadata(`${apiUrl}/schemas/${slug}`)
 
-  const [content, columns] = await Promise.all([contentData, columnsData])
+  const [content, tableInfo] = await Promise.all([contentData, tableMetadata])
 
   return (
-    <div className="m-5 overflow-hidden rounded-lg border border-gray-200 shadow-md">
-      <table className="w-full border-collapse bg-white text-left text-sm text-gray-500">
+    <div className="border-gray-200 m-5 overflow-hidden rounded-lg border shadow-md">
+      <table className="text-gray-500 w-full border-collapse bg-white text-left text-sm">
         <thead className="bg-gray-50">
           <tr>
-            {columns.map((col: Column) => (
+            {tableInfo?.columns?.map((col: Column) => (
               <th
                 key={col.columnName}
                 scope="col"
-                className="px-6 py-4 font-medium text-gray-900"
+                className="text-gray-900 px-6 py-4 font-medium"
               >
                 {col.columnName}
               </th>
             ))}
           </tr>
         </thead>
-        <tbody className="divide-y divide-gray-100 border-t border-gray-100">
+        <tbody className="divide-gray-100 border-gray-100 divide-y border-t">
           {ContentRows(content, slug)}
         </tbody>
       </table>
