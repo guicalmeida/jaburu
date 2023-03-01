@@ -1,5 +1,7 @@
 export interface Column {
-  columnName: string
+  display_name: string
+  editable: boolean
+  unique: boolean
   required: boolean
   type: ColumnType
 }
@@ -11,11 +13,11 @@ export function typeMap(type: ColumnType) {
     case 'int4':
       return 'integer'
     case 'text':
-      return 'markdown'
+      return 'rich text'
     case 'timestamptz':
       return 'timestamp'
     case 'varchar':
-      return 'string'
+      return 'simple text'
   }
 }
 
