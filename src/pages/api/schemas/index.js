@@ -12,6 +12,51 @@ export default async function handler(req, res) {
   if (req.method === 'POST') {
     const { display_name, api_id, plural_api_id, description } = await req.body
 
+    const columns_metadata = {
+      id: {
+        display_name: 'Id',
+        editable: false,
+        unique: true,
+        required: true,
+        type: 'int4',
+      },
+      created_at: {
+        display_name: 'Created at',
+        editable: false,
+        unique: false,
+        required: true,
+        type: 'timestamptz',
+      },
+      updated_at: {
+        display_name: 'Updated at',
+        editable: false,
+        unique: false,
+        required: true,
+        type: 'timestamptz',
+      },
+      api_id: {
+        display_name: 'API Id',
+        editable: true,
+        unique: true,
+        required: true,
+        type: 'varchar',
+      },
+      plural_api_id: {
+        display_name: 'Plural API id',
+        editable: true,
+        unique: true,
+        required: true,
+        type: 'varchar',
+      },
+      description: {
+        display_name: 'Description',
+        editable: true,
+        unique: false,
+        required: false,
+        type: 'text',
+      },
+    }
+
     if (api_id.includes(' ') || plural_api_id.includes(' ')) {
       return res.status(400).json({ error: 'spaces are not allowed in API' })
     }
@@ -22,6 +67,7 @@ export default async function handler(req, res) {
       plural_api_id,
       description,
       display_name,
+      columns_metadata,
     })
 
     return await Promise.all([createTable, registerTable])
