@@ -35,14 +35,14 @@ export default async function handler(req, res) {
         type: 'timestamptz',
       },
       api_id: {
-        display_name: 'API Id',
+        display_name: 'API ID',
         editable: true,
         unique: true,
         required: true,
         type: 'varchar',
       },
       plural_api_id: {
-        display_name: 'Plural API id',
+        display_name: 'Plural API ID',
         editable: true,
         unique: true,
         required: true,
