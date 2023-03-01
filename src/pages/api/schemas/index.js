@@ -34,27 +34,6 @@ export default async function handler(req, res) {
         required: true,
         type: 'timestamptz',
       },
-      api_id: {
-        display_name: 'API ID',
-        editable: true,
-        unique: true,
-        required: true,
-        type: 'varchar',
-      },
-      plural_api_id: {
-        display_name: 'Plural API ID',
-        editable: true,
-        unique: true,
-        required: true,
-        type: 'varchar',
-      },
-      description: {
-        display_name: 'Description',
-        editable: true,
-        unique: false,
-        required: false,
-        type: 'text',
-      },
     }
 
     if (api_id.includes(' ') || plural_api_id.includes(' ')) {
