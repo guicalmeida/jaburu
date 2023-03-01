@@ -5,5 +5,5 @@ export default function universalSlugify(string = '') {
     lower: true,
     remove: /[.,:/"()]/g,
     replacement: '_',
-  })
+  });
 }

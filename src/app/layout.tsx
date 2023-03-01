@@ -1,6 +1,6 @@
 import './globals.css'
 import Sidebar from '../components/sidebar'
-import { Nunito } from '@next/font/google'
+import { Nunito } from "next/font/google"
 import { ReactNode } from 'react'
 
 const nunito = Nunito({
