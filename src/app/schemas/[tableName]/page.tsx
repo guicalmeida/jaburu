@@ -1,7 +1,4 @@
 import Card from '@/components/Card'
-import ColumnForm from '@/components/column-form'
-import List from '@/components/list'
-import ColumnListItem from '@/components/column-list-item'
 import { Column, typeMap } from '@/models/columns.model'
 
 async function fetchTableMetadata(apiUrl: string) {
@@ -27,17 +24,15 @@ export default async function Page({
           Which fields should a {displayName} have?{' '}
         </p>
       </Card>
-      <ColumnForm slug={params?.tableName} />
-      <h2>Current fields:</h2>
-      <List>
-        {Object.entries<Column>(columnsMetadata).map((pair) => {
+      <ul className="flex flex-wrap gap-4">
+        {Object.values<Column>(columnsMetadata).map((column) => {
           const {
             required,
             type,
             display_name: displayName,
             editable,
             unique,
-          } = pair[1]
+          } = column
 
           let itemInfo = typeMap(type)
           if (required) itemInfo += ' · required'
@@ -45,15 +40,14 @@ export default async function Page({
 
           if (editable) {
             return (
-              <ColumnListItem
-                title={displayName}
-                info={itemInfo}
-                key={displayName}
-              />
+              <li key={displayName}>
+                <h2 className="text-lg font-black">{displayName}</h2>
+                <p className="text-sm font-light ">{itemInfo}</p>
+              </li>
             )
           }
         })}
-      </List>
+      </ul>
     </>
   )
 }
