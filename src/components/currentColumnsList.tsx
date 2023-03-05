@@ -31,7 +31,7 @@ export default async function CurrentColumnsList({
           return (
             <li
               key={displayName}
-              className="flex min-h-[90px] min-w-[250px] flex-col items-center justify-center rounded-2xl bg-jaburu-200 drop-shadow-lg"
+              className="flex h-[90px] min-w-[250px] flex-col items-center justify-center rounded-2xl bg-jaburu-200 drop-shadow-lg"
             >
               <h2 className="text-lg font-black">{displayName}</h2>
               <p className="text-sm font-light ">{itemInfo}</p>
