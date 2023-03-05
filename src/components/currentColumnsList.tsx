@@ -13,7 +13,7 @@ export default async function CurrentColumnsList({
   const tableMetadata = await fetchTableMetadata(apiUrl)
   const { columns_metadata: columnsMetadata } = tableMetadata
   return (
-    <ul className="flex flex-wrap gap-4">
+    <ul className="flex h-[100%] flex-wrap gap-4">
       {Object.values<Column>(columnsMetadata).map((column) => {
         const {
           required,
