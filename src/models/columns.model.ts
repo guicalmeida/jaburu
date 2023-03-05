@@ -3,20 +3,18 @@ export interface Column {
   editable: boolean
   unique: boolean
   required: boolean
-  type: ColumnType
+  type: string
 }
 
-type ColumnType = 'timestamptz' | 'int4' | 'text' | 'varchar'
-
-export function typeMap(type: ColumnType) {
+export function typeMap(type: string) {
   switch (type) {
     case 'int4':
       return 'integer'
-    case 'text':
+    case 'richText':
       return 'rich text'
     case 'timestamptz':
       return 'timestamp'
-    case 'varchar':
+    case 'simpleText':
       return 'simple text'
   }
 }
