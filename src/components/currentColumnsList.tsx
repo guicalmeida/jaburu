@@ -6,14 +6,12 @@ async function fetchTableMetadata(apiUrl: string) {
 }
 
 export default async function CurrentColumnsList({
-  tableName,
+  apiUrl,
 }: {
-  tableName: string
+  apiUrl: string
 }) {
-  const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/schemas/${tableName}`
   const tableMetadata = await fetchTableMetadata(apiUrl)
-  const { columns_metadata: columnsMetadata, display_name: displayName } =
-    tableMetadata
+  const { columns_metadata: columnsMetadata } = tableMetadata
   return (
     <ul className="flex flex-wrap gap-4">
       {Object.values<Column>(columnsMetadata).map((column) => {
