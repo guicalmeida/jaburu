@@ -1,5 +1,6 @@
 import Card from '@/components/Card'
 import CurrentColumnsList from '@/components/currentColumnsList'
+import NewColumnItem from '@/components/newColumnItem'
 
 async function fetchTableMetadata(apiUrl: string) {
   const data = await fetch(apiUrl, { method: 'GET' })
@@ -23,7 +24,10 @@ export default async function Page({
           Which fields should a {displayName} have?{' '}
         </p>
       </Card>
-      <CurrentColumnsList tableName={params?.tableName} />
+      <div className="flex">
+        <CurrentColumnsList apiUrl={apiUrl} />
+        <NewColumnItem apiUrl={apiUrl} />
+      </div>
     </>
   )
 }
