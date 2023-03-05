@@ -3,6 +3,7 @@
 import { ReactNode, useState } from 'react'
 import Modal from './modal'
 import TextColumnForm from './create_column_forms/textColumnForm'
+import NumberColumnForm from './create_column_forms/numberColumnForm'
 
 function ColumnModal({ title, description, component }: ColumnItem) {
   const [openModal, setOpenModal] = useState(false)
@@ -43,7 +44,7 @@ export default function NewColumnItem({ apiUrl }: { apiUrl: string }) {
     {
       title: 'Numbers',
       description: 'Exactly what it sounds like',
-      component: '',
+      component: <NumberColumnForm apiUrl={apiUrl} />,
     },
     {
       title: 'Boolean',
@@ -62,7 +63,7 @@ export default function NewColumnItem({ apiUrl }: { apiUrl: string }) {
     },
   ]
   return (
-    <ul className="flex flex-col gap-4">
+    <ul className="flex h-[100%] flex-col gap-4">
       {columnTypes.map((columnType) => {
         const { title, description, component } = columnType
 
