@@ -2,7 +2,7 @@
 
 import { ReactNode, useState } from 'react'
 import Modal from './modal'
-import TextColumnForm from './textColumnForm'
+import TextColumnForm from './create_column_forms/textColumnForm'
 
 function ColumnModal({ title, description, component }: ColumnItem) {
   const [openModal, setOpenModal] = useState(false)
