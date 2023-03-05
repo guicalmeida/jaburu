@@ -39,6 +39,28 @@ export default async function handler(req, res) {
               table.unique(columnApiId)
             }
           })
+        case 'decimal':
+          return await knex.schema.alterTable(tableName, (table) => {
+            if (required) {
+              table.float(columnApiId).notNullable()
+            } else {
+              table.float(columnApiId).nullable()
+            }
+            if (unique) {
+              table.unique(columnApiId)
+            }
+          })
+        case 'integer':
+          return await knex.schema.alterTable(tableName, (table) => {
+            if (required) {
+              table.integer(columnApiId).notNullable()
+            } else {
+              table.integer(columnApiId).nullable()
+            }
+            if (unique) {
+              table.unique(columnApiId)
+            }
+          })
       }
     }
 
