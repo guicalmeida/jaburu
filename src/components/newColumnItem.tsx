@@ -5,6 +5,7 @@ import Modal from './modal'
 import TextColumnForm from './create_column_forms/textColumnForm'
 import NumberColumnForm from './create_column_forms/numberColumnForm'
 import BooleanColumnForm from './create_column_forms/booleanColumnForm'
+import MediaColumnForm from './create_column_forms/mediaColumnForm'
 
 function ColumnModal({ title, description, component }: ColumnItem) {
   const [openModal, setOpenModal] = useState(false)
@@ -55,7 +56,7 @@ export default function NewColumnItem({ apiUrl }: { apiUrl: string }) {
     {
       title: 'Media',
       description: 'Image, vector or video',
-      component: '',
+      component: <MediaColumnForm apiUrl={apiUrl} />,
     },
     {
       title: 'Relational field',
