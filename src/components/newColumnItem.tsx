@@ -4,6 +4,7 @@ import { ReactNode, useState } from 'react'
 import Modal from './modal'
 import TextColumnForm from './create_column_forms/textColumnForm'
 import NumberColumnForm from './create_column_forms/numberColumnForm'
+import BooleanColumnForm from './create_column_forms/booleanColumnForm'
 
 function ColumnModal({ title, description, component }: ColumnItem) {
   const [openModal, setOpenModal] = useState(false)
@@ -49,7 +50,7 @@ export default function NewColumnItem({ apiUrl }: { apiUrl: string }) {
     {
       title: 'Boolean',
       description: 'Yes or no, true or false',
-      component: '',
+      component: <BooleanColumnForm apiUrl={apiUrl} />,
     },
     {
       title: 'Media',
