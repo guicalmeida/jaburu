@@ -61,6 +61,17 @@ export default async function handler(req, res) {
               table.unique(columnApiId)
             }
           })
+        case 'boolean':
+          return await knex.schema.alterTable(tableName, (table) => {
+            if (required) {
+              table.boolean(columnApiId).notNullable()
+            } else {
+              table.boolean(columnApiId).nullable()
+            }
+            if (unique) {
+              table.unique(columnApiId)
+            }
+          })
       }
     }
 
