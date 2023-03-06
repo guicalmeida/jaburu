@@ -1,6 +1,6 @@
 import './globals.css'
 import Sidebar from '../components/sidebar'
-import { Nunito } from "next/font/google"
+import { Nunito } from 'next/font/google'
 import { ReactNode } from 'react'
 
 const nunito = Nunito({
@@ -14,10 +14,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       className={`${nunito.className} max-w-[100vw] overflow-x-hidden bg-jaburu-300 text-white`}
     >
       <head />
-      <body className="pl-[328px]">
+      <body className="relative mx-auto flex max-w-7xl">
         {/* @ts-expect-error Server Component */}
         <Sidebar />
-        {children}
+        <div>{children}</div>
       </body>
     </html>
   )

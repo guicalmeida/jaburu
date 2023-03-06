@@ -16,8 +16,8 @@ async function getTableNames() {
 export default async function Sidebar() {
   const tableNames = await getTableNames()
   return (
-    <Card containerStyle="fixed top-0 bottom-0 left-0 w-72">
-      <div className="text-gray-100 text-xl">
+    <Card containerStyle="relative top-0 left-0 min-w-[280px]">
+      <div className="text-xl text-gray-100">
         <div className="flex items-center">
           <h1 className="font-bold">Jaburu CMS</h1>
         </div>
@@ -43,7 +43,7 @@ export default async function Sidebar() {
                 className="mt-3 flex cursor-pointer items-center rounded-md p-2.5 px-4 duration-300 hover:bg-jaburu-200"
                 href={`/schemas/${api_id}`}
               >
-                <span className="text-gray-200 ml-4 text-[15px] font-extralight">
+                <span className="ml-4 text-[15px] font-extralight text-gray-200">
                   {display_name}
                 </span>
               </Link>
@@ -63,7 +63,7 @@ export default async function Sidebar() {
                 className="mt-3 flex cursor-pointer items-center rounded-md p-2.5 px-4 duration-300 hover:bg-jaburu-200"
                 href={`content/${api_id}`}
               >
-                <span className="text-gray-200 ml-4 text-[15px] font-extralight">
+                <span className="ml-4 text-[15px] font-extralight text-gray-200">
                   {display_name}
                 </span>
               </Link>

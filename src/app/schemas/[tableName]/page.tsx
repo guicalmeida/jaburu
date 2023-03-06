@@ -24,7 +24,7 @@ export default async function Page({
           Which fields should a {displayName} have?{' '}
         </p>
       </Card>
-      <div className="flex w-[100%] justify-between px-6">
+      <div className="flex w-[100%] justify-between gap-6 px-6">
         <CurrentColumnsList apiUrl={apiUrl} />
         <NewColumnItem apiUrl={apiUrl} />
       </div>
