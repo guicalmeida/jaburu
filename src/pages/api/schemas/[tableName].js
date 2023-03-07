@@ -72,6 +72,37 @@ export default async function handler(req, res) {
               table.unique(columnApiId)
             }
           })
+        case 'multipleMedia':
+          return await knex.schema.createTable(
+            `${tableName}_media`,
+            (table) => {
+              table.increments()
+              table
+                .integer(`${tableName}_id`)
+                .notNullable()
+                .references('id')
+                .inTable(tableName)
+                .onDelete('CASCADE')
+
+              table
+                .integer('media_id')
+                .notNullable()
+                .references('id')
+                .inTable('media')
+                .onDelete('CASCADE')
+
+              table.increments('order', { primaryKey: false }).notNullable()
+            }
+          )
+        case 'singleMedia':
+          return await knex.schema.alterTable(tableName, (table) => {
+            table
+              .integer(columnApiId)
+              .nullable()
+              .references('id')
+              .inTable('media')
+              .onDelete('SET NULL')
+          })
       }
     }
 
