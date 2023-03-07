@@ -28,7 +28,19 @@ export default async function handler(req, res) {
 
     const createColumn = async (knex) => {
       switch (type) {
-        case 'text':
+        case 'singleLine':
+          return await knex.schema.alterTable(tableName, (table) => {
+            if (required) {
+              table.string(columnApiId).notNullable()
+            } else {
+              table.string(columnApiId).nullable()
+            }
+            if (unique) {
+              table.unique(columnApiId)
+            }
+          })
+        case 'multiLine':
+        case 'richText':
           return await knex.schema.alterTable(tableName, (table) => {
             if (required) {
               table.text(columnApiId).notNullable()
