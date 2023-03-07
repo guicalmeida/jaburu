@@ -12,8 +12,10 @@ export function typeMap(type: string) {
       return 'rich text'
     case 'timestamptz':
       return 'timestamp'
-    case 'simpleText':
-      return 'simple text'
+    case 'singleLine':
+      return 'single line text'
+    case 'multiLine':
+      return 'multi line text'
     case 'singleMedia':
       return 'single media'
     case 'multipleMedia':
