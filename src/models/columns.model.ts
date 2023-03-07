@@ -14,6 +14,10 @@ export function typeMap(type: string) {
       return 'timestamp'
     case 'simpleText':
       return 'simple text'
+    case 'singleMedia':
+      return 'single media'
+    case 'multipleMedia':
+      return 'multiple media'
     default:
       return type
   }
