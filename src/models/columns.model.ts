@@ -6,7 +6,7 @@ export interface Column {
   type: string
 }
 
-export function typeMap(type: string) {
+export function typeNameMap(type: string) {
   switch (type) {
     case 'richText':
       return 'rich text'
@@ -24,18 +24,3 @@ export function typeMap(type: string) {
       return type
   }
 }
-
-export function columnMap(column: string) {
-  switch (column) {
-    case 'id':
-      return 'ID'
-    case 'created_at':
-      return 'Created At'
-    case 'updated_at':
-      return 'Updated At'
-    default:
-      return column
-  }
-}
-
-export const staticColumns = ['id', 'created_at', 'updated_at']

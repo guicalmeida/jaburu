@@ -1,4 +1,4 @@
-import { Column, typeMap } from '@/models/columns.model'
+import { Column, typeNameMap } from '@/models/columns.model'
 
 async function fetchTableMetadata(apiUrl: string) {
   const data = await fetch(apiUrl, { method: 'GET' })
@@ -23,7 +23,7 @@ export default async function CurrentColumnsList({
           unique,
         } = column
 
-        let itemInfo = typeMap(type)
+        let itemInfo = typeNameMap(type)
         if (required) itemInfo += ' · required'
         if (unique) itemInfo += ' · unique'
 
