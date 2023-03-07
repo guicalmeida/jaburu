@@ -36,7 +36,7 @@ export default function TextColumnForm({
     formJson.unique = formJson?.unique === 'on'
     formJson.required = formJson?.required === 'on'
     formJson.editable = true
-    formJson.type = type
+    formJson.type = formJson.type ?? 'richText'
 
     fetch(apiUrl, {
       method: 'POST',
@@ -83,6 +83,31 @@ export default function TextColumnForm({
           value={apiId}
           readOnly
         />
+        {type === 'simpleText' && (
+          <div className="mb-4 flex items-center gap-5">
+            <div className="flex items-center gap-2">
+              <input
+                type="radio"
+                id="singleLine"
+                name="type"
+                value="singleLine"
+                className={radioStyle}
+                defaultChecked
+              />
+              <label htmlFor="singleLine">single line</label>
+            </div>
+            <div className="flex items-center gap-2">
+              <input
+                className={radioStyle}
+                type="radio"
+                id="multiLine"
+                name="type"
+                value="multiLine"
+              />
+              <label htmlFor="multiLine">multi line</label>
+            </div>
+          </div>
+        )}
         <div className="flex gap-10">
           <div className="mb-4 flex gap-4">
             <input
@@ -119,3 +144,6 @@ export default function TextColumnForm({
 
 const checkboxStyle =
   "h-5 w-5 appearance-none rounded-md bg-jaburu-200 checked:after:relative checked:after:ml-[5px] checked:after:mt-[1px] checked:after:block checked:after:h-3 checked:after:w-[0.375rem] checked:after:rotate-45 checked:after:border-[0.125rem] checked:after:border-t-0 checked:after:border-l-0 checked:after:border-solid checked:after:border-white checked:after:bg-transparent checked:after:transition-all checked:after:content-[''] border border-[0.125rem] border-solid border-jaburu-400"
+
+const radioStyle =
+  "checked:after:content-['']checked:h-5 checked:after:border-1 checked:after: h-5 w-5 appearance-none rounded-full border-2  border-solid border-jaburu-400 bg-jaburu-200 checked:w-5 checked:after:block  checked:after:h-[10px] checked:after:w-[10px] checked:after:translate-x-[3px] checked:after:translate-y-[3px] checked:after:rounded-full checked:after:border-[1px] checked:after:border-solid checked:after:border-jaburu-400 checked:after:bg-jaburu-100"
