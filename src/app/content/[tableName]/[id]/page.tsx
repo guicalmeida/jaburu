@@ -1,5 +1,5 @@
+import DeleteEntryButton from '@/components/deleteEntryButton'
 import ContentForm from '../../../../components/contentForm'
-import DeleteEntryButton from '../(content_table_components)/deleteEntryButton'
 
 export default async function Page({
   params,
