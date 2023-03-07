@@ -15,7 +15,7 @@ export default function MediaColumnForm({ apiUrl }: { apiUrl: string }) {
     const formJson: any = Object.fromEntries(formData.entries())
 
     formJson.unique = formJson?.unique === 'on'
-    formJson.required = formJson?.required === 'on'
+    formJson.required = false
     formJson.editable = true
 
     fetch(apiUrl, {
@@ -84,19 +84,6 @@ export default function MediaColumnForm({ apiUrl }: { apiUrl: string }) {
               value="multipleMedia"
             />
             <label htmlFor="multipleMedia">multiple media</label>
-          </div>
-        </div>
-        <div className="flex gap-10">
-          <div className="mb-4 flex gap-4">
-            <input
-              className={checkboxStyle}
-              type="checkbox"
-              id="required"
-              name="required"
-            />
-            <label className="" htmlFor="required">
-              Required?
-            </label>
           </div>
         </div>
         <input
