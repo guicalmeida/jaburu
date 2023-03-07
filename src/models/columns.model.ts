@@ -3,10 +3,21 @@ export interface Column {
   editable: boolean
   unique: boolean
   required: boolean
-  type: string
+  type: ColumnTypes
 }
 
-export function typeNameMap(type: string) {
+export type ColumnTypes =
+  | 'richText'
+  | 'timestamptz'
+  | 'singleLine'
+  | 'multiLine'
+  | 'singleMedia'
+  | 'multipleMedia'
+  | 'integer'
+  | 'decimal'
+  | 'boolean'
+
+export function typeNameMap(type: ColumnTypes) {
   switch (type) {
     case 'richText':
       return 'rich text'
