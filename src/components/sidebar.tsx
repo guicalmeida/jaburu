@@ -16,7 +16,7 @@ async function getTableNames() {
 export default async function Sidebar() {
   const tableNames = await getTableNames()
   return (
-    <Card containerStyle="relative top-0 left-0 min-w-[280px]">
+    <Card containerStyle="relative top-0 left-0 min-w-[280px] min-h-[700px]">
       <div className="text-xl text-gray-100">
         <div className="flex items-center">
           <h1 className="font-bold">Jaburu CMS</h1>

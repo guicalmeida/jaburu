@@ -14,10 +14,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       className={`${nunito.className} max-w-[100vw] overflow-x-hidden bg-jaburu-300 text-white`}
     >
       <head />
-      <body className="relative mx-auto flex max-w-7xl">
+      <body className="w-7xl relative mx-auto flex">
         {/* @ts-expect-error Server Component */}
         <Sidebar />
-        <div>{children}</div>
+        <div className="w-[100%]">{children}</div>
       </body>
     </html>
   )
