@@ -5,6 +5,7 @@ import { Column } from '@/models/columns.model'
 import { useRouter } from 'next/navigation'
 import { use } from 'react'
 import BooleanField from './create_entry_fields/booleanField'
+import DecimalField from './create_entry_fields/decimalField'
 import IntegerField from './create_entry_fields/integerField'
 import MultiLineTextField from './create_entry_fields/multiLineTextField'
 import SingleLineTextField from './create_entry_fields/singleLineTextField'
@@ -86,6 +87,8 @@ export default function ContentForm({ path, id }: FormProps) {
                 return <BooleanField column={column} key={column[0]} />
               case 'integer':
                 return <IntegerField column={column} key={column[0]} />
+              case 'decimal':
+                return <DecimalField column={column} key={column[0]} />
             }
           })}
           <input
