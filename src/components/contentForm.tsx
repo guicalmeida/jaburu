@@ -1,9 +1,20 @@
 'use client'
 
 import makeQueryClient from '@/helpers/clientQueryHelper'
-import { Column, staticColumns } from '@/models/columns.model'
+import { Column } from '@/models/columns.model'
 import { useRouter } from 'next/navigation'
 import { use } from 'react'
+import BooleanField from './create_entry_fields/booleanField'
+import IntegerField from './create_entry_fields/integerField'
+import MultiLineTextField from './create_entry_fields/multiLineTextField'
+import SingleLineTextField from './create_entry_fields/singleLineTextField'
+
+const chooseField = (column: [string, Column]) => {
+  switch (column[1].type) {
+    case 'singleLine':
+      return <SingleLineTextField column={column} />
+  }
+}
 
 async function fetchColumns(apiUrl: string) {
   const data = await fetch(apiUrl, { method: 'GET' })
@@ -49,8 +60,8 @@ export default function ContentForm({ path, id }: FormProps) {
       fetchColumns(`${apiUrl}/schemas/${path}`)
     )
   )
-  const columns = tableMetadata.columns.filter(
-    (column: Column) => !staticColumns.includes(column.columnName)
+  const columns = Object.entries<Column>(tableMetadata.columns_metadata).filter(
+    (column) => column[1].editable
   )
 
   if (id) {
@@ -65,26 +76,20 @@ export default function ContentForm({ path, id }: FormProps) {
     return (
       <>
         <form onSubmit={handleSubmit}>
-          {columns?.map((column: Column) => {
-            const { columnName, required, type } = column
-            return (
-              <label
-                key={columnName}
-                className="mb-3 block text-base font-medium"
-              >
-                {columnName}:
-                <input
-                  name={columnName}
-                  required={required}
-                  defaultValue={content?.[columnName]}
-                  type={type === 'int4' ? 'number' : 'text'}
-                  className="text-slate-900 w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium outline-none focus:border-[#6A64F1] focus:shadow-md"
-                />
-              </label>
-            )
+          {columns?.map((column: [string, Column]) => {
+            switch (column[1].type) {
+              case 'singleLine':
+                return <SingleLineTextField column={column} key={column[0]} />
+              case 'multiLine':
+                return <MultiLineTextField column={column} key={column[0]} />
+              case 'boolean':
+                return <BooleanField column={column} key={column[0]} />
+              case 'integer':
+                return <IntegerField column={column} key={column[0]} />
+            }
           })}
           <input
-            className="bg-emerald-600 m-6 rounded-md py-2 px-8"
+            className="m-6 rounded-md bg-emerald-600 py-2 px-8"
             type="submit"
             value="Submit"
           />
