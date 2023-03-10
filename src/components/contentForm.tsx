@@ -7,6 +7,7 @@ import { use } from 'react'
 import BooleanField from './create_entry_fields/booleanField'
 import DecimalField from './create_entry_fields/decimalField'
 import IntegerField from './create_entry_fields/integerField'
+import MediaField from './create_entry_fields/MediaField'
 import MultiLineTextField from './create_entry_fields/multiLineTextField'
 import RichTextField from './create_entry_fields/richTextField'
 import SingleLineTextField from './create_entry_fields/singleLineTextField'
@@ -92,6 +93,9 @@ export default function ContentForm({ path, id }: FormProps) {
                 return <DecimalField column={column} key={column[0]} />
               case 'richText':
                 return <RichTextField column={column} key={column[0]} />
+              case 'singleMedia':
+              case 'multipleMedia':
+                return <MediaField column={column} key={column[0]} />
             }
           })}
           <input

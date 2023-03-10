@@ -56,3 +56,19 @@
 *::-webkit-scrollbar-thumb {
   @apply rounded-lg bg-jaburu-200 shadow-sm;
 }
+
+.uppy-Dashboard-innerWrap {
+  @apply bg-jaburu-400;
+}
+
+.uppy-Dashboard-inner {
+  @apply overflow-auto rounded-xl border-2 border-jaburu-100;
+}
+
+.uppy-Dashboard-Item-previewIcon {
+  @apply !h-14 !w-14;
+}
+
+.uppy-Dashboard-Item-preview {
+  @apply !h-32 !w-20;
+}

@@ -1,5 +1,7 @@
 import Card from '@/components/Card'
 import ContentForm from '@/components/contentForm'
+import '@uppy/core/dist/style.css'
+import '@uppy/dashboard/dist/style.css'
 
 async function getTableMetadata(tableName: string) {
   const res = await fetch(
