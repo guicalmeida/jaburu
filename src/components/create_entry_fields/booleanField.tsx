@@ -4,7 +4,7 @@ export default function BooleanField({ column }: { column: [string, Column] }) {
   const apiId = column[0]
   const { display_name: displayName, required } = column[1]
   return (
-    <div className="flex flex-col">
+    <div className="mb-6 flex flex-col">
       <label className="mb-2 text-base font-extrabold" htmlFor={apiId}>
         {displayName}
       </label>
