@@ -1,3 +1,58 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+*:focus-visible,
+*:focus {
+  @apply outline-none;
+}
+
+/* TitTap Editor Design */
+.ProseMirror {
+  @apply h-[100%] rounded-xl bg-jaburu-400 p-3;
+}
+.ProseMirror:focus-visible {
+  @apply outline-none;
+}
+
+.ProseMirror h1 {
+  @apply text-2xl;
+}
+
+.ProseMirror h2 {
+  @apply text-xl;
+}
+
+.ProseMirror h3 {
+  @apply text-lg;
+}
+
+.ProseMirror ul,
+.ProseMirror ol {
+  @apply pl-10;
+}
+
+.ProseMirror ul {
+  @apply list-disc;
+}
+
+.ProseMirror ol {
+  @apply list-decimal;
+}
+
+.ProseMirror code {
+  @apply rounded bg-slate-600 p-2 font-mono text-slate-300;
+}
+
+.ProseMirror blockquote {
+  @apply border-l-4 border-l-slate-500 pl-4;
+}
+
+/* customize scrollbar css */
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-thumb {
+  @apply rounded-lg bg-jaburu-200 shadow-sm;
+}
